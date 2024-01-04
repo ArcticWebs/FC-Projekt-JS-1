@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="tablet.css" media="(min-width:576px)" />
+    <link rel="stylesheet" href="laptop.css" media="(min-width: 992px)" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Domowy budżet</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- COUNTER BOX -->
+      <div class="counter-box">
+        <img src="/assets/Calculator.png" alt="" class="icon" />
+        <div class="main-title">
+          Możesz jeszcze wydać <span class="money-left">555,55 PLN</span>
+        </div>
+      </div>
+      <!-- INCOME BOX -->
+      <div class="ins-and-outs">
+        <div class="in-out-box">
+          <h3>Przychody</h3>
+          <div class="input-box">
+            <input
+              id="income-name"
+              class="main-input"
+              type="text"
+              placeholder="Nazwa przychodu"
+            /><input
+              id="income-amount"
+              class="main-input number-input"
+              type="number"
+              placeholder="Kwota"
+            />
+            <div
+              id="
+            add-income"
+              class="add-button"
+            >
+              DODAJ
+            </div>
+          </div>
+          <ul>
+            <li class="list-element">
+              <span>sprzedaż na allegro</span><span>1500,55</span>
+              <div class="list-icons">
+                <img
+                  src="assets/PencilSimple.png"
+                  alt=""
+                  class="edit-delete-icon"
+                />
+                <img src="assets/Trash.png" alt="" class="edit-delete-icon" />
+              </div>
+            </li>
+            <li class="list-element">
+              <span>sprzedaż na allegro</span><span>1500,55</span>
+              <div class="list-icons">
+                <img
+                  src="assets/PencilSimple.png"
+                  alt=""
+                  class="edit-delete-icon"
+                />
+                <img src="assets/Trash.png" alt="" class="edit-delete-icon" />
+              </div>
+            </li>
+            <li class="list-element">
+              <span>sprzedaż na allegro</span><span>1500,55</span>
+              <div class="list-icons">
+                <img
+                  src="assets/PencilSimple.png"
+                  alt=""
+                  class="edit-delete-icon"
+                />
+                <img src="assets/Trash.png" alt="" class="edit-delete-icon" />
+              </div>
+            </li>
+          </ul>
+
+          <div class="in-out-summary">
+            Suma przychodów: <span class="in-out-sum-number">3500,00 PLN</span>
+          </div>
+        </div>
+        <!-- OUTCOME BOX -->
+        <div class="in-out-box">
+          <h3>Wydatki</h3>
+          <div class="input-box">
+            <input
+              class="main-input"
+              type="text"
+              placeholder="Nazwa wydatku"
+            /><input
+              class="main-input number-input"
+              type="number"
+              placeholder="Kwota"
+            />
+            <div class="add-button">DODAJ</div>
+          </div>
+          <ul>
+            <li class="list-element">
+              <span>sprzedaż na allegro</span><span>1500,55</span>
+              <div class="list-icons">
+                <img
+                  src="assets/PencilSimple.png"
+                  alt=""
+                  class="edit-delete-icon"
+                />
+                <img src="assets/Trash.png" alt="" class="edit-delete-icon" />
+              </div>
+            </li>
+            <li class="list-element">
+              <span>sprzedaż na allegro</span><span>1500,55</span>
+              <div class="list-icons">
+                <img
+                  src="assets/PencilSimple.png"
+                  alt=""
+                  class="edit-delete-icon"
+                />
+                <img src="assets/Trash.png" alt="" class="edit-delete-icon" />
+              </div>
+            </li>
+            <li class="list-element">
+              <span>sprzedaż na allegro</span><span>1500,55</span>
+              <div class="list-icons">
+                <img
+                  src="assets/PencilSimple.png"
+                  alt=""
+                  class="edit-delete-icon"
+                />
+                <img src="assets/Trash.png" alt="" class="edit-delete-icon" />
+              </div>
+            </li>
+          </ul>
+          <div class="in-out-summary">
+            Suma przychodów: <span class="in-out-sum-number">3500,00 PLN</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>

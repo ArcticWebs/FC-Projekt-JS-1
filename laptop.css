@@ -1,0 +1,19 @@
+@media (min-width: 992px) {
+  .container {
+    max-width: none;
+    width: 960px;
+  }
+  .main-title {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .ins-and-outs {
+    flex-direction: row;
+    gap: 50px;
+  }
+
+  .number-input {
+    max-width: 85px;
+  }
+}
