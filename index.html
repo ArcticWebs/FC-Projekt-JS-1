@@ -44,44 +44,11 @@
             />
             <div id="add-income" class="add-button">DODAJ</div>
           </div>
-          <ul id="income-list">
-            <li class="list-element">
-              <span>sprzedaż na allegro</span><span>1500,55</span>
-              <div class="list-icons">
-                <img
-                  src="assets/PencilSimple.png"
-                  alt=""
-                  class="edit-delete-icon"
-                />
-                <img src="assets/Trash.png" alt="" class="edit-delete-icon" />
-              </div>
-            </li>
-            <li class="list-element">
-              <span>sprzedaż na allegro</span><span>1500,55</span>
-              <div class="list-icons">
-                <img
-                  src="assets/PencilSimple.png"
-                  alt=""
-                  class="edit-delete-icon"
-                />
-                <img src="assets/Trash.png" alt="" class="edit-delete-icon" />
-              </div>
-            </li>
-            <li class="list-element">
-              <span>sprzedaż na allegro</span><span>1500,55</span>
-              <div class="list-icons">
-                <img
-                  src="assets/PencilSimple.png"
-                  alt=""
-                  class="edit-delete-icon"
-                />
-                <img src="assets/Trash.png" alt="" class="edit-delete-icon" />
-              </div>
-            </li>
-          </ul>
+          <ul id="income-list"></ul>
 
           <div class="in-out-summary">
-            Suma przychodów: <span class="in-out-sum-number">3500,00 PLN</span>
+            Suma przychodów:
+            <span id="incomes-total" class="in-out-sum-number">0,00 PLN</span>
           </div>
         </div>
         <!-- OUTCOME BOX -->
@@ -89,53 +56,22 @@
           <h3>Wydatki</h3>
           <div class="input-box">
             <input
+              id="outcome-name"
               class="main-input"
               type="text"
               placeholder="Nazwa wydatku"
             /><input
+              id="outcome-amount"
               class="main-input number-input"
               type="number"
               placeholder="Kwota"
             />
-            <div class="add-button">DODAJ</div>
+            <div id="add-outcome" class="add-button">DODAJ</div>
           </div>
-          <ul>
-            <li class="list-element">
-              <span>sprzedaż na allegro</span><span>1500,55</span>
-              <div class="list-icons">
-                <img
-                  src="assets/PencilSimple.png"
-                  alt=""
-                  class="edit-delete-icon"
-                />
-                <img src="assets/Trash.png" alt="" class="edit-delete-icon" />
-              </div>
-            </li>
-            <li class="list-element">
-              <span>sprzedaż na allegro</span><span>1500,55</span>
-              <div class="list-icons">
-                <img
-                  src="assets/PencilSimple.png"
-                  alt=""
-                  class="edit-delete-icon"
-                />
-                <img src="assets/Trash.png" alt="" class="edit-delete-icon" />
-              </div>
-            </li>
-            <li class="list-element">
-              <span>sprzedaż na allegro</span><span>1500,55</span>
-              <div class="list-icons">
-                <img
-                  src="assets/PencilSimple.png"
-                  alt=""
-                  class="edit-delete-icon"
-                />
-                <img src="assets/Trash.png" alt="" class="edit-delete-icon" />
-              </div>
-            </li>
-          </ul>
+          <ul id="outcome-list"></ul>
           <div class="in-out-summary">
-            Suma przychodów: <span class="in-out-sum-number">3500,00 PLN</span>
+            Suma wydatków:
+            <span id="outcomes-total" class="in-out-sum-number">0,00 PLN</span>
           </div>
         </div>
       </div>
