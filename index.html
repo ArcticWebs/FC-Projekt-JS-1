@@ -22,28 +22,31 @@
       <!-- COUNTER BOX -->
       <div class="counter-box">
         <img src="/assets/Calculator.png" alt="" class="icon" />
-        <div class="main-title">
-          Możesz jeszcze wydać <span class="money-left">555,55 PLN</span>
-        </div>
+        <div id="total-in-out-sum" class="main-title"></div>
       </div>
       <!-- INCOME BOX -->
       <div class="ins-and-outs">
         <div class="in-out-box">
           <h3>Przychody</h3>
-          <div class="input-box">
+          <form id="income-form" class="input-box">
             <input
-              id="income-name"
               class="main-input"
               type="text"
+              minlength="3"
+              required
               placeholder="Nazwa przychodu"
+              name="incomeName"
             /><input
-              id="income-amount"
               class="main-input number-input"
               type="number"
+              required
+              min="0.01"
+              step="0.01"
               placeholder="Kwota"
+              name="incomeAmount"
             />
-            <div id="add-income" class="add-button">DODAJ</div>
-          </div>
+            <button type="submit" class="add-button">DODAJ</button>
+          </form>
           <ul id="income-list"></ul>
 
           <div class="in-out-summary">
@@ -54,21 +57,27 @@
         <!-- OUTCOME BOX -->
         <div class="in-out-box">
           <h3>Wydatki</h3>
-          <div class="input-box">
+          <form id="outcome-form" class="input-box">
             <input
-              id="outcome-name"
               class="main-input"
               type="text"
+              minlength="3"
+              required
               placeholder="Nazwa wydatku"
+              name="outcomeName"
             /><input
-              id="outcome-amount"
               class="main-input number-input"
               type="number"
+              required
+              min="0.01"
+              step="0.01"
               placeholder="Kwota"
+              name="outcomeAmount"
             />
-            <div id="add-outcome" class="add-button">DODAJ</div>
-          </div>
+            <button type="submit" class="add-button">DODAJ</button>
+          </form>
           <ul id="outcome-list"></ul>
+
           <div class="in-out-summary">
             Suma wydatków:
             <span id="outcomes-total" class="in-out-sum-number">0,00 PLN</span>

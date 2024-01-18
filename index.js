@@ -1,80 +1,141 @@
-let incomeName = document.querySelector("#income-name");
-let incomeAmount = document.querySelector("#income-amount");
-let addIncome = document.querySelector("#add-income");
-let incomeList = document.querySelector("#income-list");
+// SELECTORS
 
-let outcomeName = document.querySelector("#outcome-name");
-let outcomeAmount = document.querySelector("#outcome-amount");
-let addOutcome = document.querySelector("#add-outcome");
-let outcomeList = document.querySelector("#outcome-list");
+const incomeForm = document.querySelector("#income-form");
+const outcomeForm = document.querySelector("#outcome-form");
 
-let incomesTotal = document.querySelector("#incomes-total");
-let outcomesTotal = document.querySelector("#outcomes-total");
+const incomeList = document.querySelector("#income-list");
+const outcomeList = document.querySelector("#outcome-list");
 
-let incomes = [];
+const incomesTotal = document.querySelector("#incomes-total");
+const outcomesTotal = document.querySelector("#outcomes-total");
+const totalInOut = document.querySelector("#total-in-out-sum");
 
-addIncome.addEventListener("click", () => {
-  incomes.push({ title: incomeName.value, amount: incomeAmount.value });
+const incomes = [];
+const outcomes = [];
+
+//  FUNCTIONS
+
+const getIncomesSum = () => {
+  return incomes.reduce((acc, element) => {
+    return acc + element.amount;
+  }, 0);
+};
+
+const getOutcomesSum = () => {
+  return outcomes.reduce((acc, element) => {
+    return acc + element.amount;
+  }, 0);
+};
+
+const updateTotalBalance = () => {
+  let incomeSum = getIncomesSum();
+
+  let outcomeSum = getOutcomesSum();
+
+  const totalSum = incomeSum - outcomeSum;
+
+  let totalText = () => {
+    if (totalSum > 0) {
+      return `Możesz jeszcze wydać ${totalSum} PLN`;
+    } else if (totalSum === 0) {
+      return `Bilans wynosi 0 PLN`;
+    } else {
+      return `Jesteś na minusie ${totalSum} PLN`;
+    }
+  };
+
+  totalInOut.innerText = totalText();
+};
+updateTotalBalance();
+
+// ADDING INCOMES
+
+const updateTotalIncome = () => {
+  const incomeSum = getIncomesSum();
+  incomesTotal.innerText = `${incomeSum} PLN`;
+};
+
+const updateIncomeList = () => {
   incomeList.innerHTML = "";
-  for (let i = 0; i <= incomes.length; i++) {
-    let incomeItem = document.createElement("li");
+
+  incomes.forEach((income) => {
+    const incomeItem = document.createElement("li");
     incomeItem.classList.add("list-element");
 
-    let incomeElement = `
-  <span>${incomes[i].title}</span><span>${incomes[i].amount}</span>
-  <div class="list-icons">
-    <img
-      src="assets/PencilSimple.png"
-      alt=""
-      class="edit-delete-icon"
-      id="edit"
-    />
-    <img src="assets/Trash.png" alt="" class="edit-delete-icon" />
-  </div>`;
+    const incomeElement = `
+<span>${income.title}</span><span>${income.amount}</span>
+<div class="list-icons">
+<img
+src="assets/PencilSimple.png"
+alt=""
+class="edit-delete-icon"
+id="edit"
+/>
+<img src="assets/Trash.png" alt="" class="edit-delete-icon" />
+</div>`;
+
     incomeItem.innerHTML = incomeElement;
     incomeList.appendChild(incomeItem);
+  });
+};
 
-    incomeName.value = "";
-    incomeAmount.value = "";
+incomeForm.addEventListener("submit", (event) => {
+  event.preventDefault();
 
-    let incomeSum = incomes.reduce((acc, element) => {
-      return acc + Number(element.amount);
-    }, 0);
+  incomes.push({
+    title: event.target.incomeName.value,
+    amount: Number(event.target.incomeAmount.value),
+  });
 
-    incomesTotal.innerText = `${incomeSum} PLN`;
-  }
+  updateIncomeList();
+  event.target.reset();
+  updateTotalIncome();
+  updateTotalBalance();
 });
 
-let outcomes = [];
+// ADDING OUTCOMES
 
-addOutcome.addEventListener("click", () => {
-  outcomes.push({ title: outcomeName.value, amount: outcomeAmount.value });
+const updateTotalOutcome = () => {
+  const outcomeSum = getOutcomesSum();
+  outcomesTotal.innerText = `${outcomeSum} PLN`;
+};
+
+const updateOutcomeList = () => {
   outcomeList.innerHTML = "";
-  for (let i = 0; i <= outcomes.length; i++) {
-    let outcomeItem = document.createElement("li");
+
+  outcomes.forEach((outcome) => {
+    const outcomeItem = document.createElement("li");
     outcomeItem.classList.add("list-element");
 
-    let outcomeElement = `
-  <span>${outcomes[i].title}</span><span>${outcomes[i].amount}</span>
-  <div class="list-icons">
-    <img
-      src="assets/PencilSimple.png"
-      alt=""
-      class="edit-delete-icon"
-      id="edit"
-    />
-    <img src="assets/Trash.png" alt="" class="edit-delete-icon" />
-  </div>`;
+    const outcomeElement = `
+<span>${outcome.title}</span><span>${outcome.amount}</span>
+<div class="list-icons">
+<img
+src="assets/PencilSimple.png"
+alt=""
+class="edit-delete-icon"
+id="edit"
+/>
+<img src="assets/Trash.png" alt="" class="edit-delete-icon" />
+</div>`;
+
     outcomeItem.innerHTML = outcomeElement;
     outcomeList.appendChild(outcomeItem);
+  });
+};
 
-    outcomeName.value = "";
-    outcomeAmount.value = "";
+outcomeForm.addEventListener("submit", (event) => {
+  event.preventDefault();
 
-    let outcomeSum = outcomes.reduce((acc, element) => {
-      return acc + Number(element.amount);
-    }, 0);
+  outcomes.push({
+    title: event.target.outcomeName.value,
+    amount: Number(event.target.outcomeAmount.value),
+  });
 
-    outcomesTotal.innerText = `${outcomeSum} PLN`;
-  }
+  updateOutcomeList();
+  event.target.reset();
+  updateTotalOutcome();
+  updateTotalBalance();
 });
+
+// incones.splice(index, 1) - usuwanie elementów - index elementów i ilośc usuwanych elementów
