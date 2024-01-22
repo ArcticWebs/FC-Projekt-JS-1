@@ -63,19 +63,64 @@ const updateIncomeList = () => {
     const incomeItem = document.createElement("li");
     incomeItem.classList.add("list-element");
 
-    const incomeElement = `
-<span>${income.title}</span><span>${income.amount}</span>
-<div class="list-icons">
-<img
-src="assets/PencilSimple.png"
-alt=""
-class="edit-delete-icon"
-id="edit"
-/>
-<img src="assets/Trash.png" alt="" class="edit-delete-icon" />
-</div>`;
+    const incomeNameText = document.createElement("span");
+    incomeNameText.innerText = `${income.title}`;
+    incomeNameText.id = "income-name";
 
-    incomeItem.innerHTML = incomeElement;
+    const incomeValueNumber = document.createElement("span");
+    incomeValueNumber.innerText = ` ${income.amount}`;
+    incomeValueNumber.id = "income-value";
+
+    const incomeIconsBox = document.createElement("div");
+    incomeIconsBox.classList.add("list-icons");
+
+    const editIcon = document.createElement("img");
+    editIcon.src = "assets/PencilSimple.png";
+    editIcon.setAttribute("alt", "edit icon");
+    editIcon.classList.add("edit-delete-icon");
+    editIcon.addEventListener("click", () => {
+      let listElementoToEdit = editIcon.closest("li");
+      let incomeNameToEdit = listElementoToEdit.querySelector("#income-name");
+      let incomeValueToEdit = listElementoToEdit.querySelector("#income-value");
+
+      let actualIncomeName = incomeNameToEdit.innerText;
+      let actualIncomeValue = incomeValueToEdit.innerText;
+
+      incomeNameToEdit.innerHTML = `<input
+      class="main-input"
+      type="text"
+      minlength="3"
+      required
+      value="${actualIncomeName}"
+    />`;
+      incomeValueToEdit.innerHTML = `<input
+    class="main-input number-input"
+    type="number"
+    required
+    min="0.01"
+    step="0.01"
+    value="${actualIncomeValue}"
+  />`;
+    });
+
+    const deleteIcon = document.createElement("img");
+    deleteIcon.src = "assets/Trash.png";
+    deleteIcon.setAttribute("alt", "");
+    deleteIcon.classList.add("edit-delete-icon");
+    deleteIcon.addEventListener("click", () => {
+      const itemToRemove = incomes.findIndex((item) => item.id === income.id);
+      incomes.splice(itemToRemove, 1);
+      updateIncomeList();
+      updateTotalIncome();
+      updateTotalBalance();
+    });
+    incomeIconsBox.appendChild(editIcon);
+    incomeIconsBox.appendChild(deleteIcon);
+
+    incomeItem.appendChild(incomeNameText);
+    incomeItem.appendChild(incomeValueNumber);
+    incomeItem.appendChild(incomeIconsBox);
+
     incomeList.appendChild(incomeItem);
   });
 };
@@ -119,7 +164,7 @@ const updateOutcomeList = () => {
 
     const editIcon = document.createElement("img");
     editIcon.src = "assets/PencilSimple.png";
-    editIcon.setAttribute("alt", "");
+    editIcon.setAttribute("alt", "edit icon");
     editIcon.classList.add("edit-delete-icon");
 
     const deleteIcon = document.createElement("img");
@@ -127,13 +172,12 @@ const updateOutcomeList = () => {
     deleteIcon.setAttribute("alt", "");
     deleteIcon.classList.add("edit-delete-icon");
     deleteIcon.addEventListener("click", () => {
-      outcome.splice(0, 1);
-
+      const itemToRemove = outcomes.findIndex((item) => item.id === outcome.id);
+      outcomes.splice(itemToRemove, 1);
       updateOutcomeList();
       updateTotalOutcome();
       updateTotalBalance();
     });
-
     outcomeIconsBox.appendChild(editIcon);
     outcomeIconsBox.appendChild(deleteIcon);
 
@@ -158,5 +202,3 @@ outcomeForm.addEventListener("submit", (event) => {
   updateTotalOutcome();
   updateTotalBalance();
 });
-
-// incones.splice(index, 1) - usuwanie elementów - index elementów i ilośc usuwanych elementów
