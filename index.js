@@ -100,7 +100,10 @@ const updateIncomeList = () => {
     min="0.01"
     step="0.01"
     value="${actualIncomeValue}"
-  />`;
+    />`;
+
+      editIcon.src = "assets/done.png";
+      editIcon.onclick = deleteIcon.src = "assets/cancel.png";
     });
 
     const deleteIcon = document.createElement("img");
