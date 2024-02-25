@@ -1,6 +1,10 @@
 import { getIncomesSum } from "./incomes.js";
 import { getOutcomesSum } from "./outcomes.js";
 
+export const generateId = () => {
+  return Date.now().toString(36) + Math.random().toString(36);
+};
+
 const totalInOut = document.querySelector("#total-in-out-sum");
 
 export const updateTotalBalance = () => {
