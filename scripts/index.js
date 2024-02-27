@@ -8,13 +8,13 @@ export const generateId = () => {
 const totalInOut = document.querySelector("#total-in-out-sum");
 
 export const updateTotalBalance = () => {
-  let incomeSum = getIncomesSum();
+  const incomeSum = getIncomesSum();
 
-  let outcomeSum = getOutcomesSum();
+  const outcomeSum = getOutcomesSum();
 
   const totalSum = incomeSum - outcomeSum;
 
-  let totalText = () => {
+  const totalText = () => {
     if (totalSum > 0) {
       return `Możesz jeszcze wydać ${totalSum} PLN`;
     } else if (totalSum === 0) {

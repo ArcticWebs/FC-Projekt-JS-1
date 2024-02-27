@@ -67,20 +67,20 @@ const renderOutcomeRow = (outcome) => {
   editIcon.setAttribute("alt", "edit icon");
   editIcon.classList.add("edit-delete-icon");
   editIcon.addEventListener("click", () => {
-    let listElementoToEdit = editIcon.closest("li");
-    let outcomeNameToEdit = listElementoToEdit.querySelector("#outcome-name");
-    let outcomeValueToEdit = listElementoToEdit.querySelector("#outcome-value");
-    let outcomeListIcons = listElementoToEdit.querySelector(".list-icons");
+    const listElementoToEdit = editIcon.closest("li");
+    const outcomeNameToEdit = listElementoToEdit.querySelector("#outcome-name");
+    const outcomeValueToEdit =
+      listElementoToEdit.querySelector("#outcome-value");
+    const outcomeListIcons = listElementoToEdit.querySelector(".list-icons");
 
-    let actualOutcomeName = outcomeNameToEdit.innerText;
-    let actualOutcomeValue = outcomeValueToEdit.innerText;
+    const actualOutcomeName = outcomeNameToEdit.innerText;
+    const actualOutcomeValue = outcomeValueToEdit.innerText;
 
     outcomeNameToEdit.innerHTML = "";
 
     const nameEditigInput = document.createElement("input");
     nameEditigInput.classList.add("main-input");
     nameEditigInput.setAttribute("type", "text");
-    nameEditigInput.setAttribute("minlength", "3");
     nameEditigInput.setAttribute("value", actualOutcomeName);
     outcomeNameToEdit.appendChild(nameEditigInput);
 
@@ -89,6 +89,7 @@ const renderOutcomeRow = (outcome) => {
     const valueEditigInput = document.createElement("input");
     valueEditigInput.classList.add("main-input", "number-input");
     valueEditigInput.setAttribute("type", "number");
+    valueEditigInput.setAttribute("step", "0.01");
     valueEditigInput.setAttribute("value", actualOutcomeValue);
     outcomeNameToEdit.appendChild(valueEditigInput);
 
@@ -100,41 +101,47 @@ const renderOutcomeRow = (outcome) => {
     doneIcon.classList.add("edit-delete-icon");
     outcomeListIcons.appendChild(doneIcon);
     doneIcon.addEventListener("click", () => {
-      const _title = nameEditigInput.value;
-      const _value = valueEditigInput.value;
+      if (nameEditigInput.value.length >= 3 && valueEditigInput.value >= 0.01) {
+        const _title = nameEditigInput.value;
+        const _value = valueEditigInput.value;
 
-      outcomes = outcomes.map((el) => {
-        if (el.id === outcome.id) {
-          return {
-            ...el,
-            title: _title,
-            amount: Number(_value),
-          };
-        }
-        return el;
-      });
+        outcomes = outcomes.map((el) => {
+          if (el.id === outcome.id) {
+            return {
+              ...el,
+              title: _title,
+              amount: Number(_value),
+            };
+          }
+          return el;
+        });
 
-      updateTotalOutcome();
-      updateTotalBalance();
+        updateTotalOutcome();
+        updateTotalBalance();
 
-      outcomeNameToEdit.innerHTML = "";
+        outcomeNameToEdit.innerHTML = "";
 
-      const outcomeNameText = document.createElement("span");
-      outcomeNameText.innerText = `${_title}`;
-      outcomeNameText.id = "outcome-name";
-      outcomeNameToEdit.appendChild(outcomeNameText);
+        const outcomeNameText = document.createElement("span");
+        outcomeNameText.innerText = `${_title}`;
+        outcomeNameText.id = "outcome-name";
+        outcomeNameToEdit.appendChild(outcomeNameText);
 
-      outcomeValueToEdit.innerHTML = "";
+        outcomeValueToEdit.innerHTML = "";
 
-      const outcomeValueNumber = document.createElement("span");
-      outcomeValueNumber.innerText = ` ${Number(_value)}`;
-      outcomeValueNumber.id = "outcome-value";
-      outcomeValueToEdit.appendChild(outcomeValueNumber);
+        const outcomeValueNumber = document.createElement("span");
+        outcomeValueNumber.innerText = ` ${Number(_value)}`;
+        outcomeValueNumber.id = "outcome-value";
+        outcomeValueToEdit.appendChild(outcomeValueNumber);
 
-      outcomeIconsBox.innerHTML = "";
+        outcomeIconsBox.innerHTML = "";
 
-      outcomeIconsBox.appendChild(editIcon);
-      outcomeIconsBox.appendChild(deleteIcon);
+        outcomeIconsBox.appendChild(editIcon);
+        outcomeIconsBox.appendChild(deleteIcon);
+      } else {
+        alert(
+          "Nazwa musi mieć więcej niż 3 litery, a wartość musi być większa niż 0.01."
+        );
+      }
     });
 
     const cancelIcon = document.createElement("img");

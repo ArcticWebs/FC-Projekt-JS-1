@@ -67,20 +67,19 @@ const renderIncomeRow = (income) => {
   editIcon.setAttribute("alt", "edit icon");
   editIcon.classList.add("edit-delete-icon");
   editIcon.addEventListener("click", () => {
-    let listElementoToEdit = editIcon.closest("li");
-    let incomeNameToEdit = listElementoToEdit.querySelector("#income-name");
-    let incomeValueToEdit = listElementoToEdit.querySelector("#income-value");
-    let incomeListIcons = listElementoToEdit.querySelector(".list-icons");
+    const listElementoToEdit = editIcon.closest("li");
+    const incomeNameToEdit = listElementoToEdit.querySelector("#income-name");
+    const incomeValueToEdit = listElementoToEdit.querySelector("#income-value");
+    const incomeListIcons = listElementoToEdit.querySelector(".list-icons");
 
-    let actualIncomeName = incomeNameToEdit.innerText;
-    let actualIncomeValue = incomeValueToEdit.innerText;
+    const actualIncomeName = incomeNameToEdit.innerText;
+    const actualIncomeValue = incomeValueToEdit.innerText;
 
     incomeNameToEdit.innerHTML = "";
 
     const nameEditigInput = document.createElement("input");
     nameEditigInput.classList.add("main-input");
     nameEditigInput.setAttribute("type", "text");
-    nameEditigInput.setAttribute("minlength", "3");
     nameEditigInput.setAttribute("value", actualIncomeName);
     incomeNameToEdit.appendChild(nameEditigInput);
 
@@ -89,6 +88,7 @@ const renderIncomeRow = (income) => {
     const valueEditigInput = document.createElement("input");
     valueEditigInput.classList.add("main-input", "number-input");
     valueEditigInput.setAttribute("type", "number");
+    valueEditigInput.setAttribute("step", "0.01");
     valueEditigInput.setAttribute("value", actualIncomeValue);
     incomeNameToEdit.appendChild(valueEditigInput);
 
@@ -100,41 +100,47 @@ const renderIncomeRow = (income) => {
     doneIcon.classList.add("edit-delete-icon");
     incomeListIcons.appendChild(doneIcon);
     doneIcon.addEventListener("click", () => {
-      const _title = nameEditigInput.value;
-      const _value = valueEditigInput.value;
+      if (nameEditigInput.value.length >= 3 && valueEditigInput.value >= 0.01) {
+        const _title = nameEditigInput.value;
+        const _value = valueEditigInput.value;
 
-      incomes = incomes.map((el) => {
-        if (el.id === income.id) {
-          return {
-            ...el,
-            title: _title,
-            amount: Number(_value),
-          };
-        }
-        return el;
-      });
+        incomes = incomes.map((el) => {
+          if (el.id === income.id) {
+            return {
+              ...el,
+              title: _title,
+              amount: Number(_value),
+            };
+          }
+          return el;
+        });
 
-      updateTotalIncome();
-      updateTotalBalance();
+        updateTotalIncome();
+        updateTotalBalance();
 
-      incomeNameToEdit.innerHTML = "";
+        incomeNameToEdit.innerHTML = "";
 
-      const incomeNameText = document.createElement("span");
-      incomeNameText.innerText = `${_title}`;
-      incomeNameText.id = "outcome-name";
-      incomeNameToEdit.appendChild(incomeNameText);
+        const incomeNameText = document.createElement("span");
+        incomeNameText.innerText = `${_title}`;
+        incomeNameText.id = "outcome-name";
+        incomeNameToEdit.appendChild(incomeNameText);
 
-      incomeValueToEdit.innerHTML = "";
+        incomeValueToEdit.innerHTML = "";
 
-      const incomeValueNumber = document.createElement("span");
-      incomeValueNumber.innerText = ` ${Number(_value)}`;
-      incomeValueNumber.id = "outcome-value";
-      incomeValueToEdit.appendChild(incomeValueNumber);
+        const incomeValueNumber = document.createElement("span");
+        incomeValueNumber.innerText = ` ${Number(_value)}`;
+        incomeValueNumber.id = "outcome-value";
+        incomeValueToEdit.appendChild(incomeValueNumber);
 
-      incomeIconsBox.innerHTML = "";
+        incomeIconsBox.innerHTML = "";
 
-      incomeIconsBox.appendChild(editIcon);
-      incomeIconsBox.appendChild(deleteIcon);
+        incomeIconsBox.appendChild(editIcon);
+        incomeIconsBox.appendChild(deleteIcon);
+      } else {
+        alert(
+          "Nazwa musi mieć więcej niż 3 litery, a wartość musi być większa niż 0.01."
+        );
+      }
     });
 
     const cancelIcon = document.createElement("img");
