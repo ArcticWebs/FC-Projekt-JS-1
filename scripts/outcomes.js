@@ -139,7 +139,7 @@ const renderOutcomeRow = (outcome) => {
         outcomeIconsBox.appendChild(deleteIcon);
       } else {
         alert(
-          "Nazwa musi mieć więcej niż 3 litery, a wartość musi być większa niż 0.01."
+          "Nazwa musi mieć co najmniej 3 litery, a minimalna wartość wydatku to 0.01."
         );
       }
     });
@@ -152,8 +152,10 @@ const renderOutcomeRow = (outcome) => {
     cancelIcon.addEventListener("click", () => {
       listElementoToEdit.innerHTML = "";
 
+      const notUpdatedOutcome = outcomes.find((item) => item.id === outcome.id);
+
       const { outcomeNameText, outcomeValueNumber, outcomeIconsBox } =
-        renderOutcomeRow(outcome);
+        renderOutcomeRow(notUpdatedOutcome);
 
       listElementoToEdit.appendChild(outcomeNameText);
       listElementoToEdit.appendChild(outcomeValueNumber);

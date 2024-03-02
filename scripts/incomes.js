@@ -138,7 +138,7 @@ const renderIncomeRow = (income) => {
         incomeIconsBox.appendChild(deleteIcon);
       } else {
         alert(
-          "Nazwa musi mieć więcej niż 3 litery, a wartość musi być większa niż 0.01."
+          "Nazwa musi mieć co najmniej 3 litery, a minimalna wartość przychodu to 0.01."
         );
       }
     });
@@ -151,12 +151,16 @@ const renderIncomeRow = (income) => {
     cancelIcon.addEventListener("click", () => {
       listElementoToEdit.innerHTML = "";
 
+      const notUpdatedIncome = incomes.find((item) => item.id === income.id);
+
       const { incomeNameText, incomeValueNumber, incomeIconsBox } =
-        renderIncomeRow(income);
+        renderIncomeRow(notUpdatedIncome);
 
       listElementoToEdit.appendChild(incomeNameText);
       listElementoToEdit.appendChild(incomeValueNumber);
       listElementoToEdit.appendChild(incomeIconsBox);
+
+      console.log(incomes, incomeNameText, incomeValueNumber, income);
     });
   });
 
